@@ -1,0 +1,20 @@
+1. What are the benefits of pure functions in real-world codebases?
+
+- pure functions are easier to test
+- pure functions are easier to reason about
+- pure functions are easyly reused when needed
+- pure functions are easy to debug
+
+2. How does immutability prevent bugs?
+- avoids unexpected chnages
+- easier Debugging
+- its safe for function reuse since you can reuse function without worring that they can corrupt data
+
+3. Compare compose() vs pipe()—which do you prefer and why?
+
+ personally i prefer pipe because the order of execution is clear (from left to right) which is normally the usual reading direction. so it can eliminate confusion
+
+4. In which functions did you struggle to maintain functional purity
+
+in the ArrayTransformation
+the function of `sqlJoin`
