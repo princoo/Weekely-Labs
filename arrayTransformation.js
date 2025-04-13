@@ -1,3 +1,15 @@
+function validateArray(arr, functionName) {
+  if (!Array.isArray(arr)) {
+    return `${functionName}: Expected an array, got ${typeof arr}`;
+  }
+  else if (arr.length === 0) {
+    return `${functionName}: Expected a non-empty array`;
+  }
+  else if (arr.some((item) => typeof item !== "number")) {
+    return `${functionName}: Expected an array of numbers`;
+  }
+}
+
 function double(arr) {
   const error = validateArray(arr, "double");
   if (error) return error;
