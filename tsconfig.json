@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",                        // Good modern JS target
+    "module": "commonjs",                   // Works well locally or with Node tools
+    "strict": true,                         // Enables all strict type-checking
+    "esModuleInterop": true,                // Smooth import support
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true ,                   // Skips checking type definitions
+    "noUnusedLocals": true,               // Uncomment to enforce no unused variables
+    "noUnusedParameters": true,          // Uncomment to enforce no unused parameters
+    "noImplicitAny": true,           // Uncomment to enforce no implicit any types
+    "strictNullChecks": true, // Uncomment to enforce strict null checks
+    "noEmitOnError": true, // Uncomment to prevent emitting files on error
+  },
+  "include": ["*.ts"],                 // Pick up all .ts files in your project
+  "exclude": ["node_modules"]              // Avoid parsing node_modules
+}
