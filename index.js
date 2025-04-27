@@ -6,9 +6,14 @@ fetch("https://picsum.photos/v2/list?page=1").then((response) => {
         displayData(imageData);
     });
 });
+let imageIndex = 0;
+const lightBox = document.querySelector("#ligthbox");
 const lightBoxClose = document.querySelector("#light-box-close");
+const container = document.querySelector(".container");
+const ligthBoxPrevious = document.querySelector("#ligthbox-previous");
+const ligthBoxNext = document.querySelector("#ligthbox-next");
+const wrapperDiv = document.querySelector("#wrapper");
 function displayData(images = []) {
-    const container = document.querySelector(".container");
     if (!container)
         return;
     container.innerHTML = "";
@@ -32,7 +37,7 @@ function displayData(images = []) {
             iconElement.src = "./view-svgrepo-com.svg";
             imageElement.alt = image.author;
             listItem.addEventListener("click", () => {
-                ligthBoxImage(image);
+                ligthBoxImage(Number(image.id), images.length);
             });
             listItem.appendChild(imageElement);
             listItem.appendChild(iconElement);
@@ -41,21 +46,83 @@ function displayData(images = []) {
         container.appendChild(fragmentElement);
     }
 }
-function ligthBoxImage(image) {
-    const lightBox = document.querySelector("#ligthbox");
-    const lightBoxImage = document.querySelector("#ligthbox-image");
-    const lightBoxAuthor = document.querySelector("#ligthbox-title");
-    const lightBoxRedirect = document.querySelector("#light-box-download");
-    if (!lightBox || !lightBoxImage || !lightBoxAuthor || !lightBoxRedirect)
-        return;
-    lightBox.classList.remove("hidden");
-    lightBoxImage.src = image.download_url;
-    lightBoxImage.alt = image.author;
-    lightBoxRedirect.href = image.url;
+function ligthBoxImage(imageId, dataLength = imageData.length) {
+    wrapperDiv === null || wrapperDiv === void 0 ? void 0 : wrapperDiv.classList.add("h-[81vh]", "overflow-hidden");
+    imageIndex = imageId;
+    checkNavigationButtons();
+    if (imageId < dataLength && imageId >= 0) {
+        imageIndex = Number(imageId);
+        const image = imageData[Number(imageId)];
+        const lightBoxImage = document.querySelector("#ligthbox-image");
+        const lightBoxAuthor = document.querySelector("#ligthbox-title");
+        const lightBoxRedirect = document.querySelector("#light-box-download");
+        if (!lightBox || !lightBoxImage || !lightBoxAuthor || !lightBoxRedirect)
+            return;
+        lightBox.classList.remove("opacity-0", "pointer-events-none");
+        lightBox.classList.add("opacity-100");
+        // lightBox.classList.remove("hidden");
+        lightBoxImage.src = image.download_url;
+        lightBoxImage.alt = image.author;
+        lightBoxRedirect.href = image.url;
+    }
 }
 lightBoxClose === null || lightBoxClose === void 0 ? void 0 : lightBoxClose.addEventListener("click", () => {
-    const lightBox = document.querySelector("#ligthbox");
-    if (!lightBox)
-        return;
-    lightBox.classList.add("hidden");
+    closeLightBox();
+});
+ligthBoxNext === null || ligthBoxNext === void 0 ? void 0 : ligthBoxNext.addEventListener("click", () => {
+    moveNext();
+});
+ligthBoxPrevious === null || ligthBoxPrevious === void 0 ? void 0 : ligthBoxPrevious.addEventListener("click", () => {
+    movePrevious();
+});
+function moveNext() {
+    if (imageIndex < imageData.length - 1)
+        imageIndex += 1;
+    ligthBoxPrevious === null || ligthBoxPrevious === void 0 ? void 0 : ligthBoxPrevious.classList.remove("hidden");
+    checkNavigationButtons();
+    ligthBoxImage(imageIndex);
+}
+function movePrevious() {
+    if (imageIndex > 0)
+        imageIndex -= 1;
+    ligthBoxNext === null || ligthBoxNext === void 0 ? void 0 : ligthBoxNext.classList.remove("hidden");
+    checkNavigationButtons();
+    ligthBoxImage(imageIndex);
+}
+function checkNavigationButtons() {
+    if (imageIndex === 0) {
+        ligthBoxPrevious === null || ligthBoxPrevious === void 0 ? void 0 : ligthBoxPrevious.classList.add("hidden");
+    }
+    else {
+        ligthBoxPrevious === null || ligthBoxPrevious === void 0 ? void 0 : ligthBoxPrevious.classList.remove("hidden");
+    }
+    if (imageIndex === imageData.length - 1) {
+        ligthBoxNext === null || ligthBoxNext === void 0 ? void 0 : ligthBoxNext.classList.add("hidden");
+    }
+    else {
+        ligthBoxNext === null || ligthBoxNext === void 0 ? void 0 : ligthBoxNext.classList.remove("hidden");
+    }
+}
+function closeLightBox() {
+    // const lightBox: HTMLDivElement | null = document.querySelector("#ligthbox");
+    // container?.classList.remove("overflow-hidden");
+    // if (!lightBox) return;
+    // lightBox.classList.add("hidden");
+    lightBox === null || lightBox === void 0 ? void 0 : lightBox.classList.remove("opacity-100");
+    lightBox === null || lightBox === void 0 ? void 0 : lightBox.classList.add("opacity-0");
+    setTimeout(() => {
+        lightBox === null || lightBox === void 0 ? void 0 : lightBox.classList.add("pointer-events-none");
+    }, 300); // Wait for the opacity transition to finish (300ms)
+    wrapperDiv === null || wrapperDiv === void 0 ? void 0 : wrapperDiv.classList.remove("h-[81vh]", "overflow-hidden");
+}
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeLightBox();
+    }
+    else if (event.key === "ArrowRight") {
+        moveNext();
+    }
+    else if (event.key === "ArrowLeft") {
+        movePrevious();
+    }
 });

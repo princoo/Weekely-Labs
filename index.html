@@ -3,24 +3,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
     <title>Image Gallery</title>
   </head>
-  <body>
-    <div class="bg-gray-300 p-5">
+  <body class="bg-gray-300">
+    <div class="p-5">
+      <h1 class="text-center text-3xl font-bold text-gray-600">
+        Image Gallery
+      </h1>
+      <p class="text-center text-sm mt-2">By Alejandro Escamilla</p>
+    </div>
+    <div id="wrapper" class="p-5 ">
       <ul
         class="container grid grid-cols-4 gap-5 justify-items-center mt-10 p-4 rounded-lg"
-      ></ul>
+      >
+        <p class="col-span-4 text-center text-sm text-gray-600">
+          Loading Images...
+        </p>
+      </ul>
     </div>
 
     <div
       id="ligthbox"
-      class="hidden fixed p-2 inset-0 z-50 flex bg-black/80 transition-opacity"
+      class="opacity-0 pointer-events-none transition-all duration-300 fixed inset-0 z-50 flex bg-black/80 transition-opacity"
     >
-      <div
-        class="absolute bg-white p-5 overflow-y-auto w-[70%] shadow-lg mt- left-1/2 transform -translate-x-1/2"
-      >
-        <div class="flex justify-between items-center bg-white mb-2">
-          <p class="text-sm text-gray-500 flex gap-2 ">
+      <div class="absolute -top-5 left-0 max-h-[104vh] overflow-x-auto w-full">
+        <div
+          class="flex bg-gray-300/50 sticky top-5 justify-between items-center px-5 py-2"
+        >
+          <p class="text-sm flex gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="w-6 h-6"
@@ -32,11 +43,10 @@
                 d="M12 12c2.7 0 4.5-1.8 4.5-4.5S14.7 3 12 3 7.5 4.8 7.5 7.5 9.3 12 12 12zm0 1.5c-3 0-9 1.5-9 4.5V21h18v-3c0-3-6-4.5-9-4.5z"
               />
             </svg>
-
             <span>Author:</span>
             <span id="ligthbox-title">Alejandro Escamilla</span>
           </p>
-          <a id="light-box-download" href="">
+          <a id="light-box-download" href="" target="_blank">
             <button
               class="px-10 self-center py-2 bg-blue-500 rounded-lg hover:bg-blue-400 text-gray-200 hover:text-gray-600 tracking-wider"
             >
@@ -44,7 +54,7 @@
             </button>
           </a>
         </div>
-        <!-- <svg
+        <svg
           id="light-box-close"
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -54,18 +64,29 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="ml-auto mr-0 cursor-pointer mb-2 text-white absolute top-2 right-3"
+          class="ml-auto mr-0 sticky top-20 cursor-pointer text-white absolute right-5"
         >
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
-        </svg> -->
-
+        </svg>
         <img
           id="ligthbox-image"
           src=""
           alt=""
-          class="object-cover border-[1px] border-gray-100 max-h-[80vh] w-full"
+          class="h-full w-full object-contain"
         />
+        <p
+          id="ligthbox-previous"
+          class="fixed top-1/2 left-5 bg-blue-100/50 cursor-pointer hover:bg-blue-100/30 text-center text-white py-2 px-5 rounded-lg"
+        >
+          <
+        </p>
+        <p
+          id="ligthbox-next"
+          class="fixed top-1/2 right-5 bg-blue-100/50 cursor-pointer hover:bg-blue-100/30 text-center text-white py-2 px-5 rounded-lg"
+        >
+          >
+        </p>
       </div>
     </div>
 

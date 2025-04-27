@@ -14,10 +14,18 @@ fetch("https://picsum.photos/v2/list?page=1").then((response: Response) => {
   });
 });
 
+let imageIndex: number = 0;
+const lightBox: HTMLDivElement | null = document.querySelector("#ligthbox");
 const lightBoxClose: HTMLElement | null =
   document.querySelector("#light-box-close");
+const container: HTMLElement | null = document.querySelector(".container");
+const ligthBoxPrevious: HTMLElement | null =
+  document.querySelector("#ligthbox-previous");
+const ligthBoxNext: HTMLElement | null =
+  document.querySelector("#ligthbox-next");
+const wrapperDiv: HTMLElement | null = document.querySelector("#wrapper");
+
 function displayData(images: Image[] = []) {
-  const container: HTMLElement | null = document.querySelector(".container");
   if (!container) return;
   container.innerHTML = "";
   if (images.length === 0) {
@@ -39,7 +47,7 @@ function displayData(images: Image[] = []) {
       iconElement.src = "./view-svgrepo-com.svg";
       imageElement.alt = image.author;
       listItem.addEventListener("click", () => {
-        ligthBoxImage(image);
+        ligthBoxImage(Number(image.id), images.length);
       });
       listItem.appendChild(imageElement);
       listItem.appendChild(iconElement);
@@ -49,25 +57,82 @@ function displayData(images: Image[] = []) {
   }
 }
 
-function ligthBoxImage(image: Image) {
-  const lightBox: HTMLDivElement | null = document.querySelector("#ligthbox");
-  const lightBoxImage: HTMLImageElement | null =
-    document.querySelector("#ligthbox-image");
-  const lightBoxAuthor: HTMLSpanElement | null =
-    document.querySelector("#ligthbox-title");
-  const lightBoxRedirect: HTMLAnchorElement | null = document.querySelector(
-    "#light-box-download"
-  );
-  if (!lightBox || !lightBoxImage || !lightBoxAuthor || !lightBoxRedirect)
-    return;
-  lightBox.classList.remove("hidden");
-  lightBoxImage.src = image.download_url;
-  lightBoxImage.alt = image.author;
-  lightBoxRedirect.href = image.url;
+function ligthBoxImage(imageId: number, dataLength: number = imageData.length) {
+  wrapperDiv?.classList.add("h-[81vh]", "overflow-hidden");
+  imageIndex = imageId;
+  checkNavigationButtons();
+  if (imageId < dataLength && imageId >= 0) {
+    imageIndex = Number(imageId);
+    const image: Image = imageData[Number(imageId)];
+    const lightBoxImage: HTMLImageElement | null =
+      document.querySelector("#ligthbox-image");
+    const lightBoxAuthor: HTMLSpanElement | null =
+      document.querySelector("#ligthbox-title");
+    const lightBoxRedirect: HTMLAnchorElement | null = document.querySelector(
+      "#light-box-download"
+    );
+    if (!lightBox || !lightBoxImage || !lightBoxAuthor || !lightBoxRedirect)
+      return;
+
+    lightBox.classList.remove("opacity-0", "pointer-events-none");
+    lightBox.classList.add("opacity-100");
+    lightBoxImage.src = image.download_url;
+    lightBoxImage.alt = image.author;
+    lightBoxRedirect.href = image.url;
+  }
 }
 
 lightBoxClose?.addEventListener("click", () => {
-  const lightBox: HTMLDivElement | null = document.querySelector("#ligthbox");
-  if (!lightBox) return;
-  lightBox.classList.add("hidden");
+  closeLightBox();
+});
+
+ligthBoxNext?.addEventListener("click", () => {
+  moveNext();
+});
+ligthBoxPrevious?.addEventListener("click", () => {
+  movePrevious();
+});
+
+function moveNext() {
+  if (imageIndex < imageData.length - 1) imageIndex += 1;
+  ligthBoxPrevious?.classList.remove("hidden");
+  checkNavigationButtons();
+  ligthBoxImage(imageIndex);
+}
+function movePrevious() {
+  if (imageIndex > 0) imageIndex -= 1;
+  ligthBoxNext?.classList.remove("hidden");
+  checkNavigationButtons();
+  ligthBoxImage(imageIndex);
+}
+
+function checkNavigationButtons() {
+  if (imageIndex === 0) {
+    ligthBoxPrevious?.classList.add("hidden");
+  } else {
+    ligthBoxPrevious?.classList.remove("hidden");
+  }
+  if (imageIndex === imageData.length - 1) {
+    ligthBoxNext?.classList.add("hidden");
+  } else {
+    ligthBoxNext?.classList.remove("hidden");
+  }
+}
+function closeLightBox() {
+  lightBox?.classList.remove("opacity-100");
+  lightBox?.classList.add("opacity-0");
+  setTimeout(() => {
+    lightBox?.classList.add("pointer-events-none");
+  }, 300);
+  wrapperDiv?.classList.remove("h-[81vh]", "overflow-hidden");
+}
+
+document.addEventListener("keydown", (event: KeyboardEvent) => {
+  if (event.key === "Escape") {
+    closeLightBox();
+  } else if (event.key === "ArrowRight") {
+    moveNext();
+  } else if (event.key === "ArrowLeft") {
+    movePrevious();
+  }
 });
