@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - week-3/image-gallery-typescript
+      - week-3/image-gallery-typescript  # your branch
 
 jobs:
   deploy:
@@ -13,16 +13,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build your project
+      - name: Install dependencies (if any)
         run: |
           npm install
+
+      - name: Compile TypeScript
+        run: |
           npm run build
 
-      - name: Deploy to gh-pages
+      - name: Deploy compiled site
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./build  
+          publish_dir: ./  # because your HTML, CSS, JS are all here
           destination_dir: week-3/image-gallery-typescript
           keep_files: true
