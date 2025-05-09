@@ -1,5 +1,12 @@
+import { useContext } from "react";
+import { ParamContext } from "../App";
+import type { MyContextType } from "../types/testData";
 
 export default function SideBar() {
+  const { params, setParams } = useContext<MyContextType>(ParamContext);
+  function handleClick(value: string) {
+    setParams((prev) => ({ ...prev, genre: value }));
+  }
   const genreList: string[] = [
     "Action",
     "Adult",
@@ -48,8 +55,8 @@ export default function SideBar() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            clip-rule="evenodd"
-            fill-rule="evenodd"
+            clipRule="evenodd"
+            fillRule="evenodd"
             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
           ></path>
         </svg>
@@ -71,13 +78,12 @@ export default function SideBar() {
           </a>
           <ul className="space-y-2 font-medium">
             {genreList.map((genre) => (
-              <li key={genre}>
-                <a
-                  href="#"
-                  className="flex items-center p-2 text-white rounded-lg hover:bg-secondary group text-sm"
-                >
-                  <span className="ms-3">{genre}</span>
-                </a>
+              <li
+                key={genre}
+                className="flex items-center p-2 text-white rounded-lg hover:bg-secondary group text-sm"
+                onClick={() => handleClick(genre)}
+              >
+                <span className="ms-3">{genre}</span>
               </li>
             ))}
           </ul>

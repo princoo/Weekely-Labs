@@ -1,26 +1,17 @@
 import useFetch from "../hooks/useFetch";
 import type { Movie } from "../types/movie";
 import type { Rating } from "../types/rating";
-import { CiStar } from "react-icons/ci";
 import StarIcon from "./StarIcon";
-
-
-function ratingStars(rating: number) {
-  const stars = Math.round(rating / 2);
-  const starIcons = [];
-  for (let i = 0; i < stars; i++) {
-    starIcons.push(<StarIcon key={i} />);
-  }
-  return (
-    <div className="flex items-center">{starIcons}</div>
-  );
-
-}
+import { dummyRatings } from "../types/testData";
+import { useState } from "react";
 
 export default function MovieCard({ movie }: { movie: Movie }) {
-  const { data, loading, error } = useFetch<Rating>(`/${movie.id}/ratings`);
+  // const { data, loading, error } = useFetch<Rating>(`/${movie.id}/ratings`);
+  const [data, setdata] = useState<Rating>(dummyRatings[0]);
 
-  console.log(loading);
+  // if (error) {
+  //   return <h1>{error}</h1>;
+  // }
   return (
     <div>
       <div className=" bg-red-400 group relative w-60 h-80 flex flex-col items-start rounded-t-4xl cursor-pointer overflow-hidden">
@@ -39,18 +30,15 @@ export default function MovieCard({ movie }: { movie: Movie }) {
           <h1 className="font-bold uppercase text-white">
             {movie.titleText.text}
           </h1>
-          {/* <h3 className="text-accent font-medium uppercase text-sm">
-            {movie.primaryImage?.caption?.plainText}
-          </h3> */}
-          <div className="bg-red-300 w-1/2">
-            {loading && <h1>Loading...</h1>}
-            {error && <h1>{error}</h1>}
-            {data && (<p>{data.averageRating}</p>)}
-            <div className="fex w-full">
-            {data && ratingStars(data.averageRating)}
-            </div>
+          <div className="flex justify-between w-full items-center mt-2">
+            <p>({movie.releaseYear.year})</p>
+          {data && (
+            <p className="flex gap-1 items-cente font-medium text-sm">
+              <StarIcon />
+              <span>{data.averageRating}</span>
+            </p>
+          )}
           </div>
-          <StarIcon />
         </div>
       </div>
     </div>

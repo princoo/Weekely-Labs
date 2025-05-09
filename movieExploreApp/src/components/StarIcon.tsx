@@ -3,7 +3,7 @@ import React from "react";
 export default function StarIcon() {
   return (
     <svg
-      className="w-4 h-4 text-yellow-300 ms-1"
+      className="w-4 h-4 text-yellow-300"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

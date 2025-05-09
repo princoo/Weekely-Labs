@@ -11,5 +11,4 @@ const api = axios.create({
     "x-rapidapi-host": API_HOST,
   },
 });
-
 export default api;
