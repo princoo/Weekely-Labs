@@ -32,7 +32,7 @@ export default function SideBar() {
         data-drawer-toggle="logo-sidebar"
         aria-controls="logo-sidebar"
         type="button"
-        className="inline-flex items-center  p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100"
         onClick={toggleSidebar}
       >
         <span className="sr-only">Open sidebar</span>
