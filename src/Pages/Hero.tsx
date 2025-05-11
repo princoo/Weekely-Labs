@@ -14,7 +14,7 @@ import { getUpdatedPageUrl } from "../utils/getupdatedUrl";
 
 export default function Hero() {
   const contextParams = useContext<MyContextType>(ParamContext);
-  const [url, setUrl] = useState<string>("/titles");
+  const [url, setUrl] = useState<string>("titles");
   const [seachValue, setseachValue] = useState<string>("");
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [currentPage, setcurrentPage] = useState<string>("");
@@ -64,14 +64,13 @@ export default function Hero() {
     if (!nextPage) {
       prevUrl = seachValue
         ? `titles/search/title/${seachValue}?exact=false&list=most_pop_series`
-        : "/titles";
+        : "titles";
     }
     const { updatedUrl, isSearch } = getUpdatedPageUrl(
       nextPage === null ? prevUrl! : nextPage,
       currentPage,
       type
     );
-    console.log(updatedUrl);
     if (updatedUrl) {
       if (!isSearch) {
         setUrl(updatedUrl);
