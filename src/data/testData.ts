@@ -2,9 +2,30 @@ import type { Movie } from "../types/movie";
 import type { Rating } from "../types/rating";
 
 export const dummyMovies: Movie[] = [
+
   {
+
     _id: "1",
     id: "tt0000001",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img1",
       width: 200,
@@ -41,6 +62,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "2",
     id: "tt0000002",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img2",
       width: 200,
@@ -73,6 +113,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "3",
     id: "tt0000003",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img3",
       width: 1920,
@@ -109,6 +168,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "4",
     id: "tt0000004",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: undefined,
     titleType: {
       text: "Movie",
@@ -135,6 +213,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "5",
     id: "tt0000005",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img5",
       width: 1280,
@@ -171,6 +268,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "6",
     id: "tt0000006",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img6",
       width: 500,
@@ -203,6 +319,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "7",
     id: "tt0000007",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: undefined,
     titleType: {
       text: "Short",
@@ -229,6 +364,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "8",
     id: "tt0000008",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img8",
       width: 1600,
@@ -261,6 +415,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "9",
     id: "tt0000009",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img9",
       width: 800,
@@ -297,6 +470,25 @@ export const dummyMovies: Movie[] = [
   {
     _id: "10",
     id: "tt0000010",
+    ratingsSummary: {
+      aggregateRating: 4.5,
+      voteCount: 100,
+    },
+    genres: {
+      genres: [
+        {
+          text: "Action",
+          id: "action",
+          __typename: "Genre",
+        },
+        {
+          text: "Adventure",
+          id: "adventure",
+          __typename: "Genre",
+        },
+      ],
+      __typename: "GenreList",
+    },
     primaryImage: {
       id: "img10",
       width: 1024,
