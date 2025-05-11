@@ -9,21 +9,18 @@ import { genreList } from "../data/genre";
 
 export default function SideBar() {
   const contextParams = useContext<MyContextType>(ParamContext);
-  // Add state to track if sidebar is open
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   function handleClick(value: string) {
     contextParams?.setParams((prev: MovieQueryParams) => ({
       ...prev,
       genre: value,
+      list:"titles"
     }));
-    // Close sidebar after selection on mobile
     if (window.innerWidth < 640) {
       setIsSidebarOpen(false);
     }
   }
-
-  // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
@@ -36,7 +33,6 @@ export default function SideBar() {
         aria-controls="logo-sidebar"
         type="button"
         className="inline-flex items-center  p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100"
-        // Add onClick handler to toggle sidebar
         onClick={toggleSidebar}
       >
         <span className="sr-only">Open sidebar</span>
@@ -45,7 +41,6 @@ export default function SideBar() {
 
       <aside
         id="logo-sidebar"
-        // Dynamically control the transform class based on state
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } sm:translate-x-0`}

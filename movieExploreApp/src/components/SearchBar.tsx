@@ -6,19 +6,14 @@ interface SearchPayload {
 }
 export default function SearchBar({
   onSearch,
-  // initialValue
 }: {
   onSearch: (query: string) => void;
-  // initialValue?: string;
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SearchPayload>({
-    // defaultValues:{
-    //   query: initialValue
-    // }
   });
 
   function onSubmit(data: SearchPayload) {

@@ -11,8 +11,10 @@ export const ParamContext = createContext<MyContextType>({
 });
 function App() {
   const [params, setParams] = useState<MovieQueryParams>({
-    list: "most_pop_series",
+    list: "top_boxoffice_200",
+    info: "base_info",
   });
+
   return (
     <ParamContext.Provider value={{ params, setParams }}>
       <div>

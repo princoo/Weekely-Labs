@@ -1,19 +1,9 @@
-import { useContext } from "react";
 import StarIcon from "./StarIcon";
-import defaultImage from "../assets/image_not_found.png"
+import defaultImage from "../assets/image_not_found.png";
 import type { Movie } from "../types/movie";
-import type { Rating } from "../types/rating";
-import type { MyContextType } from "../types/movieQueryParams";
-import { ParamContext } from "../App";
+import { MdOutlineHowToVote } from "react-icons/md";
 
-export default function MovieDetails({
-  movie,
-  ratings,
-}: {
-  movie: Movie;
-  ratings: Rating;
-}) {
-  const contextParams = useContext<MyContextType>(ParamContext);
+export default function MovieDetails({ movie }: { movie: Movie }) {
   return (
     <div className="bg-accent w-full h-[70vh] relative mt-10">
       <img
@@ -26,14 +16,20 @@ export default function MovieDetails({
         <h1 className=" text-lg sm:text-4xl uppercase font-extrabold">
           {movie.originalTitleText.text}
         </h1>
-        <h1 className="text-xl capitalize mt-3">
-          {movie.releaseYear
-            ? movie.releaseYear.year
-            : contextParams?.params.genre}
-        </h1>
-        <p className="flex gap-1  mt-3">
-          <StarIcon /> <span>{ratings.averageRating || 4.5}</span>
+        <p className="text-lg mt-5 line-clamp-3">
+          {movie.plot?.plotText.plainText}
         </p>
+        <div className="flex gap-20 items-end justify-center">
+          <p className="flex gap-1  mt-3">
+            <StarIcon />{" "}
+            <span>{movie.ratingsSummary?.aggregateRating || 3}</span>
+          </p>
+          <p className="flex gap-1">
+            <MdOutlineHowToVote />{" "}
+            <span>{movie.ratingsSummary?.voteCount || 3433}</span>
+          </p>
+        </div>
+        <p className="mt-3 text-sm uppercase">{movie.plot?.language.id}</p>
         <button
           type="button"
           className="bg-secondary px-6 py-2 rounded-md mt-10 text-white tracking-wider"
