@@ -1,5 +1,5 @@
-import type { Movie } from "./movie";
-import type { Rating } from "./rating";
+import type { Movie } from "../types/movie";
+import type { Rating } from "../types/rating";
 
 export const dummyMovies: Movie[] = [
   {

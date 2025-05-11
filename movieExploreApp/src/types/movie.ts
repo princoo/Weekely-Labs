@@ -27,7 +27,7 @@ export interface Movie {
       text: string;
       __typename: string;
     };
-    releaseYear: {
+    releaseYear?: {
       year: number;
       endYear: number | null;
       __typename: string;

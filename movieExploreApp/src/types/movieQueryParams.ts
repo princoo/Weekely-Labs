@@ -9,6 +9,7 @@ export interface MovieQueryParams {
   info?: "base_info" | "mini_info" | "image";
   limit?: number;
   genre?: string;
+  exact?: boolean;
   // [key: string]: any;
 }
 

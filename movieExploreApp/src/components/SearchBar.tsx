@@ -4,15 +4,25 @@ import { useForm } from "react-hook-form";
 interface SearchPayload {
   query: string;
 }
-export default function SearchBar() {
+export default function SearchBar({
+  onSearch,
+  // initialValue
+}: {
+  onSearch: (query: string) => void;
+  // initialValue?: string;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SearchPayload>();
+  } = useForm<SearchPayload>({
+    // defaultValues:{
+    //   query: initialValue
+    // }
+  });
 
   function onSubmit(data: SearchPayload) {
-    console.log(data.query);
+    onSearch(data.query);
   }
   return (
     <form className="max-w-lg mx-auto mr-0" onSubmit={handleSubmit(onSubmit)}>
@@ -42,7 +52,7 @@ export default function SearchBar() {
         />
         <button
           type="submit"
-          className="text-white absolute end-2.5 bottom-1.5 bg-secondary hover:bg-secondary/50 font-medium rounded-lg text-sm px-4 py-2 cursor-pointer"
+          className="text-white absolute end-2.5 bottom-[5px] bg-secondary hover:bg-secondary/50 font-medium rounded-lg text-sm px-4 py-2 cursor-pointer"
         >
           Search
         </button>
