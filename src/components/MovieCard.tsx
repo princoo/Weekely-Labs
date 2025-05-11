@@ -1,6 +1,7 @@
 import type { Movie } from "../types/movie";
 import StarIcon from "./StarIcon";
 import defaultImage from "../assets/image_not_found.png";
+import { useState } from "react";
 
 export default function MovieCard({
   movie,
@@ -9,12 +10,17 @@ export default function MovieCard({
   movie: Movie;
   onClick: (data: Movie) => void;
 }) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <div onClick={() => onClick(movie)}>
-      <div className=" bg-red-400 group relative w-60 h-80 flex flex-col items-start rounded-t-4xl cursor-pointer overflow-hidden">
+      <div className=" bg-red-400/50 group relative w-60 h-80 flex flex-col items-start rounded-t-4xl cursor-pointer overflow-hidden">
         <div className=" w-full h-full relative">
           <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+            onLoad={() => setLoaded(true)}
+            className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-300 ease-in-out ${
+              loaded ? "opacity-100" : "opacity-0 blur-sm"
+            }`}
             src={movie.primaryImage ? movie.primaryImage.url : defaultImage}
             alt={movie.primaryImage?.id}
           />

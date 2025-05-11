@@ -6,24 +6,27 @@ import type {
   MyContextType,
 } from "../types/movieQueryParams";
 import { genreList } from "../data/genre";
+import { produce } from "immer";
 
 export default function SideBar() {
   const contextParams = useContext<MyContextType>(ParamContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
-  function handleClick(value: string) {
+
+  function handleClick (value: string){
     contextParams?.setParams((prev: MovieQueryParams) => ({
       ...prev,
       genre: value,
-      list:"titles"
+      list: "titles",
     }));
     if (window.innerWidth < 640) {
       setIsSidebarOpen(false);
     }
   }
+
   const toggleSidebar = () => {
-    setIsSidebarOpen(prev => !prev);
+    setIsSidebarOpen((prev) => !prev);
   };
+
   
   return (
     <div>
@@ -42,7 +45,7 @@ export default function SideBar() {
       <aside
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
@@ -54,7 +57,7 @@ export default function SideBar() {
               </span>
             </a>
             {/* Add close button for mobile */}
-            <button 
+            <button
               onClick={toggleSidebar}
               className="text-white p-2 rounded-lg hover:bg-secondary/50 sm:hidden"
             >
@@ -62,11 +65,26 @@ export default function SideBar() {
             </button>
           </div>
           <ul className="space-y-2 font-medium">
+            <p>{contextParams.params.genre}</p>
+            <li
+              className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
+                !contextParams.params.genre && "bg-secondary"
+              }`}
+              onClick={() =>
+                contextParams.setParams(
+                  produce(contextParams.params, (draft) => {
+                    delete draft.genre;
+                  })
+                )
+              }
+            >
+              <span className="ms-3">All</span>
+            </li>
             {genreList.map((genre) => (
               <li
                 key={genre}
                 className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer ${
-                  contextParams?.params.genre === genre && "bg-secondary"
+                  contextParams.params.genre === genre && "bg-secondary"
                 } group text-sm`}
                 onClick={() => handleClick(genre)}
               >
@@ -76,10 +94,10 @@ export default function SideBar() {
           </ul>
         </div>
       </aside>
-      
+
       {/* Add overlay for mobile to close sidebar when clicking outside */}
       {isSidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden"
           onClick={toggleSidebar}
         ></div>

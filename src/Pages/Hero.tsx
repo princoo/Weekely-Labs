@@ -19,7 +19,10 @@ export default function Hero() {
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [currentPage, setcurrentPage] = useState<string>("");
   const [displayMovies, setDisplayMovies] = useState<Movie[]>([]);
-  const { data, loading, error,refetch } = useFetchMovies(url, contextParams.params);
+  const { data, loading, error, refetch } = useFetchMovies(
+    url,
+    contextParams.params
+  );
   const {
     data: searchedMovies,
     loading: searchLoading,
