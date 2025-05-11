@@ -4,6 +4,6 @@ import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Weekly-Labs/lab-5/movie-explorer-app/',
+  base: '/Weekly-Labs/lab-5/movie-explore-app/',
   plugins: [react(), tailwindcss()],
 });
