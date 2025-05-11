@@ -3,7 +3,7 @@ name: Deploy Movie Explorer
 on:
   push:
     branches:
-      - lab-5/movie-explorer-app
+      - lab-5/movie-explore-app
 
 jobs:
   deploy:
