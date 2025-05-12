@@ -4,7 +4,7 @@ import useFetchMovies from "../hooks/useFetchMovies";
 import type { Movie } from "../types/movie";
 import type { MyContextType } from "../types/movieQueryParams";
 import SearchBar from "../components/SearchBar";
-import { ParamContext } from "../App";
+import { paramContext } from "../App";
 import Pagination from "../components/Paginator";
 import NotFound from "../components/NotFound";
 import Loader from "../components/Loader";
@@ -13,7 +13,7 @@ import MoviesContainer from "../components/MoviesContainer";
 import { getUpdatedPageUrl } from "../utils/getupdatedUrl";
 
 export default function Hero() {
-  const contextParams = useContext<MyContextType>(ParamContext);
+  const contextParams = useContext<MyContextType>(paramContext);
   const [url, setUrl] = useState<string>("titles");
   const [seachValue, setseachValue] = useState<string>("");
   const [nextPage, setNextPage] = useState<string | null>(null);

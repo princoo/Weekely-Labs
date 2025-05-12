@@ -1,15 +1,9 @@
-import type { Movie } from "../types/movie";
+import type { MovieCard } from "../types/movie";
 import StarIcon from "./StarIcon";
 import defaultImage from "../assets/image_not_found.png";
 import { useState } from "react";
 
-export default function MovieCard({
-  movie,
-  onClick,
-}: {
-  movie: Movie;
-  onClick: (data: Movie) => void;
-}) {
+export default function MovieCard({ movie, onClick }: MovieCard) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -22,7 +16,7 @@ export default function MovieCard({
               loaded ? "opacity-100" : "opacity-0 blur-sm"
             }`}
             src={movie.primaryImage ? movie.primaryImage.url : defaultImage}
-            alt={movie.primaryImage?.id}
+            alt={movie.originalTitleText.text}
           />
         </div>
         <div className="flex flex-col items-start p-4 text-start absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent w-full h-1/2">

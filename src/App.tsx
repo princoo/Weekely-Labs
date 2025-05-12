@@ -5,7 +5,7 @@ import Hero from "./Pages/Hero";
 import type { MovieQueryParams, MyContextType } from "./types/movieQueryParams";
 import Footer from "./components/Footer";
 
-export const ParamContext = createContext<MyContextType>({
+export const paramContext = createContext<MyContextType>({
   params: {},
   setParams: () => {},
 });
@@ -16,7 +16,7 @@ function App() {
   });
 
   return (
-    <ParamContext.Provider value={{ params, setParams }}>
+    <paramContext.Provider value={{ params, setParams }}>
       <div>
         <SideBar />
         <div className="sm:ml-60 p-4">
@@ -24,7 +24,7 @@ function App() {
           <Footer />
         </div>
       </div>
-    </ParamContext.Provider>
+    </paramContext.Provider>
   );
 }
 

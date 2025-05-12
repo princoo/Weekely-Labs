@@ -55,3 +55,8 @@ export interface Movie {
   };
   releaseDate: string | null;
 }
+
+export interface MovieCard {
+  movie: Movie;
+  onClick: (data: Movie) => void;
+}

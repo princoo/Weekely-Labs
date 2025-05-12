@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ParamContext } from "../App";
+import { paramContext } from "../App";
 import { FaBarsStaggered } from "react-icons/fa6";
 import type {
   MovieQueryParams,
@@ -9,7 +9,7 @@ import { genreList } from "../data/genre";
 import { produce } from "immer";
 
 export default function SideBar() {
-  const contextParams = useContext<MyContextType>(ParamContext);
+  const contextParams = useContext<MyContextType>(paramContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   function handleClick (value: string){

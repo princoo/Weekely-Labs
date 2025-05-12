@@ -1,16 +1,12 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import type { PaginatorProps } from "../types/paginator";
 
 const Pagination = ({
   next,
   onPrevious,
   onNext,
   page,
-}: {
-  onNext: () => void;
-  onPrevious: () => void;
-  next: string | null;
-  page: string;
-}) => {
+}: PaginatorProps) => {
   return (
     <div className="flex items-center justify-center space-x-2 my-4 mt-20">
       {Number(page) > 1 && (
