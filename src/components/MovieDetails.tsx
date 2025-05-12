@@ -2,20 +2,15 @@ import StarIcon from "./StarIcon";
 import defaultImage from "../assets/image_not_found.png";
 import type { Movie } from "../types/movie";
 import { MdOutlineHowToVote } from "react-icons/md";
-import { useState } from "react";
+import ImageWithLoading from "./ImageWithLoader";
 
 export default function MovieDetails({ movie }: { movie: Movie }) {
-  const [loaded, setLoaded] = useState(false);
   return (
     <div className="bg-accent w-full h-[70vh] relative mt-10">
-      <img
-        loading="eager"
-        src={movie.primaryImage?.url ? movie.primaryImage.url : defaultImage}
+      <ImageWithLoading
+        src={movie.primaryImage?.url ?? defaultImage}
         alt={movie.originalTitleText.text}
-        onLoad={() => setLoaded(true)}
-        className={`w-full object-cover object-center h-full absolute top-0 left-0 transition-opacity duration-500 ${
-          loaded ? "opacity-100" : "opacity-0 blur-sm"
-        }`}
+        className="w-full h-full absolute top-0 left-0 "
       />
       <div className="bg-gradient-to-r w-full from-black to-transparent absolute top-0 h-full flex-col items-start justify-center p-4" />
       <div className="text-start absolute w-1/2 top-1/2 transform -translate-y-1/2 flex left-10 flex-col items-start justify-start p-4">

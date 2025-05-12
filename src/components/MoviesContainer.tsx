@@ -6,7 +6,6 @@ import MovieCard from "./MovieCard";
 export default function MoviesContainer({ movies }: { movies: Movie[] }) {
   const [selectedMovie, setSelectedMovie] = useState<Movie>(movies[7]);
 
-
   function handleMovieClick(movie: Movie) {
     if (movie) setSelectedMovie(movie);
   }
