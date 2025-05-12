@@ -55,18 +55,23 @@ export default function Hero() {
 
   const handleSearch = useCallback(
     (title: string) => {
+      contextParams.setParams(
+        produce(contextParams.params, (draft) => {
+          delete draft.genre;
+        })
+      );
       if (title.trim() === seachValue) return;
       setseachValue(title);
       searchQuery(`titles/search/title/${title}`, searchParams);
     },
-    [searchParams, searchQuery, seachValue]
+    [contextParams, seachValue, searchQuery, searchParams]
   );
 
   function handlePagination(type: "next" | "prev") {
     let prevUrl;
     if (!nextPage) {
       prevUrl = seachValue
-        ? `titles/search/title/${seachValue}?exact=false&list=most_pop_series`
+        ? `titles/search/title/${seachValue}?exact=false&list=${contextParams.params.list}`
         : "titles";
     }
     const { updatedUrl, isSearch } = getUpdatedPageUrl(

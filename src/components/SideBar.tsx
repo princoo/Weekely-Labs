@@ -65,7 +65,6 @@ export default function SideBar() {
             </button>
           </div>
           <ul className="space-y-2 font-medium">
-            <p>{contextParams.params.genre}</p>
             <li
               className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
                 !contextParams.params.genre && "bg-secondary"

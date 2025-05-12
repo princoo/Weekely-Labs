@@ -15,7 +15,6 @@ export default function SearchBar({
     formState: { errors },
   } = useForm<SearchPayload>({
   });
-
   function onSubmit(data: SearchPayload) {
     onSearch(data.query);
   }
