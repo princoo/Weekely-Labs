@@ -1,3 +1,6 @@
+import { setPage } from "../features/movies/moviesSlice";
+import { store } from "../redux/store";
+
 export function getUpdatedPageUrl(
   url: string | null,
   page: string,
@@ -10,6 +13,7 @@ export function getUpdatedPageUrl(
   const newPage =
     direction === "next" ? Number(page) + 1 : Math.max(Number(page) - 1, 1);
   params.set("page", String(newPage));
+  store.dispatch(setPage(newPage)); // updating the page in the redux store
 
   const updatedUrl = `${fullUrl.pathname}?page=${newPage.toString()}`; // reconstructing a new url with chnaged params
 //   const updatedUrl = `${fullUrl.pathname}?page=${newPage}&${params.toString()}`; // reconstructing a new url with chnaged params

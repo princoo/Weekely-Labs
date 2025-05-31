@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { paramContext } from "../App";
+// import { paramContext } from "../App";
 import { FaBarsStaggered } from "react-icons/fa6";
 import type {
   MovieQueryParams,
@@ -7,17 +7,27 @@ import type {
 } from "../types/movieQueryParams";
 import { genreList } from "../data/genre";
 import { produce } from "immer";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { editFilter, removeFilter } from "../features/movies/moviesSlice";
+import { store } from "../redux/store";
 
 export default function SideBar() {
-  const contextParams = useContext<MyContextType>(paramContext);
+  // const contextParams = useContext<MyContextType>(paramContext);
+  const { filters } = useAppSelector(
+    (state) => state.movies
+  );
+  const dispatch = useAppDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  function handleClick (value: string){
-    contextParams?.setParams((prev: MovieQueryParams) => ({
-      ...prev,
-      genre: value,
-      list: "titles",
-    }));
+  function handleClick(value: string) {
+    dispatch(editFilter({ key: "genre", value }));
+    dispatch(editFilter({ key: "list", value: "titles" }));
+    console.log(store.getState().movies.filters);
+    // contextParams?.setParams((prev: MovieQueryParams) => ({
+    //   ...prev,
+    //   genre: value,
+    //   list: "titles",
+    // }));
     if (window.innerWidth < 640) {
       setIsSidebarOpen(false);
     }
@@ -27,7 +37,6 @@ export default function SideBar() {
     setIsSidebarOpen((prev) => !prev);
   };
 
-  
   return (
     <div>
       <button
@@ -67,14 +76,16 @@ export default function SideBar() {
           <ul className="space-y-2 font-medium">
             <li
               className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
-                !contextParams.params.genre && "bg-secondary"
+                // !contextParams.params.genre && "bg-secondary"
+                !filters.genre && "bg-secondary"
               }`}
               onClick={() =>
-                contextParams.setParams(
-                  produce(contextParams.params, (draft) => {
-                    delete draft.genre;
-                  })
-                )
+                dispatch(removeFilter("genre"))
+                // contextParams.setParams(
+                //   produce(contextParams.params, (draft) => {
+                //     delete draft.genre;
+                //   })
+                // )
               }
             >
               <span className="ms-3">All</span>
@@ -83,7 +94,7 @@ export default function SideBar() {
               <li
                 key={genre}
                 className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer ${
-                  contextParams.params.genre === genre && "bg-secondary"
+                  filters.genre === genre && "bg-secondary"
                 } group text-sm`}
                 onClick={() => handleClick(genre)}
               >
