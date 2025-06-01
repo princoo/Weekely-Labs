@@ -1,47 +1,32 @@
-import {
-  FaHeart,
-  FaStar,
-  FaPlay,
-  FaCalendarAlt,
-  FaClock,
-} from "react-icons/fa";
+import { FaHeart, FaStar, FaPlay, FaCalendarAlt } from "react-icons/fa";
+import { useLoaderData } from "react-router-dom";
 import { Button } from "../components/Button";
-import { Badge } from "../components/Badge";
+import { MdHowToVote } from "react-icons/md";
+import { IoArrowBackOutline } from "react-icons/io5";
+import type { Movie } from "../types/movie";
+import defaultImage from "../assets/image_not_found.png";
+import type { Rating } from "../types/rating";
 
 export default function MoviePage() {
-  // Sample movie data - replace with your actual data
-  const movie = {
-    poster:
-      "https://m.media-amazon.com/images/M/MV5BNTc4MTc3NTQ5OF5BMl5BanBnXkFtZTcwOTg0NjI4NA@@._V1_.jpg",
-    title: "Inception",
-    rating: 8.8,
-    year: 2010,
-    duration: "148 min",
-    genres: ["Action", "Sci-Fi", "Thriller"],
-    description:
-      "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
-    director: "Christopher Nolan",
-    cast: ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy", "Ellen Page"],
-  };
+  const { movie, ratings } = useLoaderData<{
+    movie: Movie;
+    ratings: Rating;
+  }>();
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Background gradient overlay */}
+    <div className="min-h-screen bg-primary text-white">
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
 
       <div className="relative z-10">
-        {/* Hero Section */}
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4">
+          <IoArrowBackOutline className="mb-10 w-10 h-10 cursor-pointer hover:bg-gray-400 p-2 rounded-md transition-colors duration-150 ease-in-out" />
           <div className="grid lg:grid-cols-[400px_1fr] gap-8 lg:gap-12">
-            {/* Movie Poster */}
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center lg:justify-start h-[500px] overflow-hidden">
               <div className="relative group">
                 <img
-                  src={movie.poster || "/placeholder.svg"}
-                  alt={movie.title}
-                  width={400}
-                  height={600}
-                  className="rounded-lg shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                  src={movie.primaryImage?.url || defaultImage}
+                  alt={movie.originalTitleText.text}
+                  className="rounded-lg w-full h-full object-cover shadow-2xl transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <Button
@@ -57,19 +42,18 @@ export default function MoviePage() {
 
             {/* Movie Details */}
             <div className="space-y-6">
-              {/* Title and Year */}
               <div>
-                <h1 className="text-4xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  {movie.title}
+                <h1 className="text-start text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  {movie.originalTitleText.text}
                 </h1>
                 <div className="flex items-center gap-4 text-gray-400">
                   <span className="flex items-center gap-1">
                     <FaCalendarAlt className="w-4 h-4" />
-                    {movie.year}
+                    {movie.releaseYear?.year}
                   </span>
                   <span className="flex items-center gap-1">
-                    <FaClock className="w-4 h-4" />
-                    {movie.duration}
+                    <MdHowToVote className="w-4 h-4" />
+                    {ratings.numVotes}
                   </span>
                 </div>
               </div>
@@ -82,7 +66,7 @@ export default function MoviePage() {
                       <FaStar
                         key={i}
                         className={`w-5 h-5 ${
-                          i < Math.floor(movie.rating / 2)
+                          i < Math.floor(ratings.averageRating / 2)
                             ? "text-yellow-400"
                             : "text-gray-600"
                         }`}
@@ -90,45 +74,17 @@ export default function MoviePage() {
                     ))}
                   </div>
                   <span className="text-2xl font-bold text-yellow-400">
-                    {movie.rating}
+                    {ratings.averageRating.toFixed(1)}
                   </span>
                   <span className="text-gray-400">/10</span>
                 </div>
               </div>
-
-              {/* Genres */}
-              <div className="flex flex-wrap gap-2">
-                {movie.genres.map((genre) => (
-                  <Badge
-                    key={genre}
-                    variant="outline"
-                    className="border-gray-600 text-gray-300 hover:bg-gray-800 cursor-pointer"
-                  >
-                    {genre}
-                  </Badge>
-                ))}
-              </div>
-
-              {/* Description */}
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold">Overview</h2>
+                <h2 className="text-md font-semibold">Overview</h2>
                 <p className="text-gray-300 leading-relaxed text-lg">
-                  {movie.description}
+                  {movie.primaryImage?.caption?.plainText ||
+                    "No description available."}
                 </p>
-              </div>
-
-              {/* Director and Cast */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <h3 className="font-semibold mb-2 text-gray-400">Director</h3>
-                  <p className="text-white">{movie.director}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2 text-gray-400">Cast</h3>
-                  <p className="text-white">
-                    {movie.cast.slice(0, 3).join(", ")}
-                  </p>
-                </div>
               </div>
 
               {/* Action Buttons */}
@@ -148,65 +104,6 @@ export default function MoviePage() {
                   <FaPlay className="w-5 h-5 mr-2" />
                   Watch Now
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Additional Info Section */}
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="font-semibold mb-4 text-gray-400">Movie Info</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Release Date:</span>
-                  <span>July 16, {movie.year}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Runtime:</span>
-                  <span>{movie.duration}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Rating:</span>
-                  <span>PG-13</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="font-semibold mb-4 text-gray-400">Box Office</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Budget:</span>
-                  <span>$160M</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Worldwide:</span>
-                  <span>$836.8M</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Domestic:</span>
-                  <span>$292.6M</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="font-semibold mb-4 text-gray-400">Awards</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Oscar Wins:</span>
-                  <span>4</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Oscar Nominations:</span>
-                  <span>8</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">IMDB Top 250:</span>
-                  <span>#13</span>
-                </div>
               </div>
             </div>
           </div>

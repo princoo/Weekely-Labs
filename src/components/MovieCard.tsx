@@ -2,10 +2,11 @@ import type { MovieCard } from "../types/movie";
 import StarIcon from "./StarIcon";
 import defaultImage from "../assets/image_not_found.png";
 import ImageWithLoading from "./ImageWithLoader";
+import { Link } from "react-router-dom";
 
-export default function MovieCard({ movie, onClick }: MovieCard) {
+export default function MovieCard({ movie }: MovieCard) {
   return (
-    <div onClick={() => onClick(movie)}>
+    <Link to={`movie/${movie.id}`} className="no-underline">
       <div className=" bg-red-400/50 group relative w-60 h-80 flex flex-col items-start rounded-t-4xl cursor-pointer overflow-hidden">
         <div className=" w-full h-full relative">
           <ImageWithLoading
@@ -27,6 +28,6 @@ export default function MovieCard({ movie, onClick }: MovieCard) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

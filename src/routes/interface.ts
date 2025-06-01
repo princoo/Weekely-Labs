@@ -5,3 +5,8 @@ export interface RouteObject {
   index?: boolean;
   path?: string;
 }
+export interface MovieParam {
+  params: {
+    movieId: string;
+  };
+}

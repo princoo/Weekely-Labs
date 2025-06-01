@@ -1,18 +1,10 @@
-import { useContext, useState } from "react";
-// import { paramContext } from "../App";
+import { useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
-import type {
-  MovieQueryParams,
-  MyContextType,
-} from "../types/movieQueryParams";
 import { genreList } from "../data/genre";
-import { produce } from "immer";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { editFilter, removeFilter } from "../features/movies/moviesSlice";
-import { store } from "../redux/store";
 
 export default function SideBar() {
-  // const contextParams = useContext<MyContextType>(paramContext);
   const { filters } = useAppSelector(
     (state) => state.movies
   );
@@ -22,12 +14,6 @@ export default function SideBar() {
   function handleClick(value: string) {
     dispatch(editFilter({ key: "genre", value }));
     dispatch(editFilter({ key: "list", value: "titles" }));
-    console.log(store.getState().movies.filters);
-    // contextParams?.setParams((prev: MovieQueryParams) => ({
-    //   ...prev,
-    //   genre: value,
-    //   list: "titles",
-    // }));
     if (window.innerWidth < 640) {
       setIsSidebarOpen(false);
     }
@@ -81,11 +67,6 @@ export default function SideBar() {
               }`}
               onClick={() =>
                 dispatch(removeFilter("genre"))
-                // contextParams.setParams(
-                //   produce(contextParams.params, (draft) => {
-                //     delete draft.genre;
-                //   })
-                // )
               }
             >
               <span className="ms-3">All</span>

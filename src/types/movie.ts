@@ -58,5 +58,5 @@ export interface Movie {
 
 export interface MovieCard {
   movie: Movie;
-  onClick: (data: Movie) => void;
+  // onClick: (data: Movie) => void;
 }
