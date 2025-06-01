@@ -19,7 +19,7 @@ export default function SearchBar({
     onSearch(data.query);
   }
   return (
-    <form className="max-w-lg mx-auto mr-0" onSubmit={handleSubmit(onSubmit)}>
+    <form className="max-w-xl w-98" onSubmit={handleSubmit(onSubmit)}>
       <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
         Search
       </label>

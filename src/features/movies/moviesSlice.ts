@@ -4,12 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface MovieSliceState {
   search: string;
-  // genre: string;
   page: number;
   filters: {
     [key: string]: string | number | boolean;
   };
   movies: Movie[];
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: MovieSliceState = {
@@ -21,6 +22,8 @@ const initialState: MovieSliceState = {
     info: "base_info",
   },
   movies: [],
+  loading: false,
+  error: null,
 };
 
 export const moviesSlice = createSlice({
@@ -30,9 +33,12 @@ export const moviesSlice = createSlice({
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
-    // setGenre: (state, action: PayloadAction<string>) => {
-    //   state.genre = action.payload;
-    // },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
+    },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
@@ -64,6 +70,6 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const { setSearch, setPage, setFilter, removeFilter, setMovies,editFilter } =
+export const { setSearch, setPage, setFilter, removeFilter, setMovies,editFilter,setError,setLoading } =
   moviesSlice.actions;
 export default moviesSlice.reducer;

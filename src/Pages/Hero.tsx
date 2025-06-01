@@ -9,26 +9,30 @@ import useSearch from "../hooks/useSearch";
 import MoviesContainer from "../components/MoviesContainer";
 import { getUpdatedPageUrl } from "../utils/getupdatedUrl";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+
 import {
   removeFilter,
   setMovies,
   setPage,
   setSearch,
 } from "../features/movies/moviesSlice";
+import WatchListBadge from "../components/WatchListBadge";
+import { useSyncQueryToRedux } from "../hooks/useSyncQueryToRedux";
+import { useSyncReduxToQuery } from "../hooks/useSyncReduxToQuery";
 
 export default function Hero() {
-  const { filters, movies, page, search } = useAppSelector(
+  useSyncQueryToRedux();
+  useSyncReduxToQuery();
+  const { filters, movies, page, search, error, loading } = useAppSelector(
     (state) => state.movies
+  );
+  const { error: searchError, loading: searchLoading } = useAppSelector(
+    (state) => state.searchIndicators
   );
   const [url, setUrl] = useState<string>("titles");
   const [nextPage, setNextPage] = useState<string | null>(null);
-  const { data, loading, error, refetch } = useFetchMovies(url, filters);
-  const {
-    data: searchedMovies,
-    loading: searchLoading,
-    error: searchError,
-    searchQuery,
-  } = useSearch();
+  const { data, refetch } = useFetchMovies(url, filters);
+  const { data: searchedMovies, searchQuery } = useSearch();
 
   const dispatch = useAppDispatch();
 
@@ -46,7 +50,7 @@ export default function Hero() {
       setNextPage(searchedMovies.next);
       dispatch(setPage(Number(searchedMovies.page)));
     }
-  }, [searchedMovies,dispatch]);
+  }, [searchedMovies, dispatch]);
   const searchParams = produce(filters, (draft) => {
     draft.exact = false;
     delete draft.genre;
@@ -87,7 +91,10 @@ export default function Hero() {
   if (error || searchError) return <NotFound Reload={() => refetch()} />;
   return (
     <div className="w-full">
-      <SearchBar onSearch={handleSearch} />
+      <div className="flex items-center justify-between mb-4 gap-2 w-full">
+        <SearchBar onSearch={handleSearch} />
+        <WatchListBadge />
+      </div>
       {search && (
         <p className="text-2xl font-bold text-start">Results for "{search}"</p>
       )}

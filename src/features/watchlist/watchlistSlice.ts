@@ -18,7 +18,7 @@ export const watchlistSlice = createSlice({
       state.favorites.push(action.payload);
     },
     removeFavorite: (state, action: PayloadAction<string>) => {
-      state.favorites = state.favorites.filter(movie => movie._id !== action.payload);
+      state.favorites = state.favorites.filter(movie => movie.id !== action.payload);
     },
   },
 })

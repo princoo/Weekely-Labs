@@ -3,11 +3,11 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { genreList } from "../data/genre";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { editFilter, removeFilter } from "../features/movies/moviesSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar() {
-  const { filters } = useAppSelector(
-    (state) => state.movies
-  );
+  const navigate = useNavigate();
+  const { filters } = useAppSelector((state) => state.movies);
   const dispatch = useAppDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -17,6 +17,7 @@ export default function SideBar() {
     if (window.innerWidth < 640) {
       setIsSidebarOpen(false);
     }
+    navigate("/");
   }
 
   const toggleSidebar = () => {
@@ -62,12 +63,12 @@ export default function SideBar() {
           <ul className="space-y-2 font-medium">
             <li
               className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
-                // !contextParams.params.genre && "bg-secondary"
                 !filters.genre && "bg-secondary"
               }`}
-              onClick={() =>
-                dispatch(removeFilter("genre"))
-              }
+              onClick={() => {
+                dispatch(removeFilter("genre"));
+                navigate("/");
+              }}
             >
               <span className="ms-3">All</span>
             </li>
@@ -86,7 +87,7 @@ export default function SideBar() {
         </div>
       </aside>
 
-      {/* Add overlay for mobile to close sidebar when clicking outside */}
+      {/* add overlay for mobile to close sidebar when clicking outside */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden"

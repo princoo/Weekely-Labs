@@ -3,18 +3,19 @@ import type { MovieQueryParams } from "../types/movieQueryParams";
 import { fetchData } from "../utils/fetchUtils";
 import type { Movie } from "../types/movie";
 import type { Response } from "../types/response";
+import { useAppDispatch } from "../redux/hooks";
+import { setError, setLoading } from "../features/search/searchIndicators";
 
 export default function useSearch() {
   const [data, setData] = useState<Response<Movie[]> | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+   const dispatch = useAppDispatch();
 
   const searchQuery = useCallback(
     async (searchUrl: string, params: MovieQueryParams = {}) => {
       if (!searchUrl) return;
 
-      setLoading(true);
-      setError(null);
+      dispatch(setLoading(true));
+      dispatch(setError(null));
 
       try {
         const response = await fetchData<Movie[], MovieQueryParams>(
@@ -24,13 +25,13 @@ export default function useSearch() {
         setData(response);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
-        setError(err.message);
+        dispatch(setError(err.message));
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     },
-    []
+    [dispatch]
   );
 
-  return { data, loading, error, searchQuery };
+  return { data,searchQuery };
 }

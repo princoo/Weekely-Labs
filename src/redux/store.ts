@@ -7,9 +7,14 @@ import {
   REHYDRATE,
   persistReducer,
   persistStore,
-} from 'redux-persist';
+} from "redux-persist";
+import { searchIndicatorSlice } from "../features/search/searchIndicators";
 
-const rootReducers = combineSlices(moviesSlice, watchlistSlice);
+const rootReducers = combineSlices(
+  moviesSlice,
+  watchlistSlice,
+  searchIndicatorSlice
+);
 const persistConfig = {
   key: "root",
   storage,

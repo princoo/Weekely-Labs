@@ -3,6 +3,8 @@ import Hero from "../Pages/Hero";
 import App from "../App";
 import MoviePage from "../Pages/MoviePage";
 import { movieDetailLoader } from "./movieDetailLoader";
+import WatchlistPage from "../Pages/WatchList";
+import Loader from "../components/Loader";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,11 @@ const router = createBrowserRouter([
         element: <MoviePage />,
         loader: movieDetailLoader,
         errorElement: <div>Could not load movie.</div>,
+        hydrateFallbackElement: <Loader/>
+      },
+      {
+        path: "watchlist",
+        element: <WatchlistPage />,
       },
     ],
   },

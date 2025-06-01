@@ -1,17 +1,29 @@
 import { FaHeart, FaStar, FaPlay, FaCalendarAlt } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Button } from "../components/Button";
 import { MdHowToVote } from "react-icons/md";
 import { IoArrowBackOutline } from "react-icons/io5";
 import type { Movie } from "../types/movie";
 import defaultImage from "../assets/image_not_found.png";
 import type { Rating } from "../types/rating";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { addFavorite } from "../features/watchlist/watchlistSlice";
+import toast from "react-hot-toast";
 
 export default function MoviePage() {
   const { movie, ratings } = useLoaderData<{
     movie: Movie;
     ratings: Rating;
   }>();
+  const dispatch = useAppDispatch();
+  const { favorites } = useAppSelector((state) => state.watchlist);
+  const { movies } = useAppSelector((state) => state.movies);
+
+  function handleAddToFavorites(movie: Movie) {
+    const fullMovie = movies.filter((m) => m.id === movie.id);
+    dispatch(addFavorite(fullMovie[0]));
+    toast.success("Added to watchlist")
+  }
 
   return (
     <div className="min-h-screen bg-primary text-white">
@@ -19,7 +31,9 @@ export default function MoviePage() {
 
       <div className="relative z-10">
         <div className="container mx-auto px-4">
-          <IoArrowBackOutline className="mb-10 w-10 h-10 cursor-pointer hover:bg-gray-400 p-2 rounded-md transition-colors duration-150 ease-in-out" />
+          <Link to="/" className="flex items-center">
+            <IoArrowBackOutline className="mb-10 w-10 h-10 cursor-pointer hover:bg-gray-400 p-2 rounded-md transition-colors duration-150 ease-in-out" />
+          </Link>
           <div className="grid lg:grid-cols-[400px_1fr] gap-8 lg:gap-12">
             <div className="flex justify-center lg:justify-start h-[500px] overflow-hidden">
               <div className="relative group">
@@ -89,13 +103,21 @@ export default function MoviePage() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button
-                  size="lg"
-                  className="bg-secondary hover:bg-red-500 text-white font-semibold px-8"
-                >
-                  <FaHeart className="w-5 h-5 mr-2" />
-                  Add to Favorites
-                </Button>
+                {favorites.find((fav) => fav.id === movie.id) ? (
+                  <p className="px-8 bg-secondary py-2 rounded-md">
+                    Added to watchlist
+                  </p>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="bg-secondary hover:bg-red-500 text-white font-semibold px-8"
+                    onClick={() => handleAddToFavorites(movie)}
+                  >
+                    <FaHeart className="w-5 h-5 mr-2" />
+                    Add to Favorites
+                  </Button>
+                )}
+
                 <Button
                   size="lg"
                   variant="outline"

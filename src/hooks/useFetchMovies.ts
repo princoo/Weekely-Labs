@@ -3,29 +3,30 @@ import type { MovieQueryParams } from "../types/movieQueryParams";
 import { fetchData } from "../utils/fetchUtils";
 import type { Movie } from "../types/movie";
 import type { Response } from "../types/response";
+import { useAppDispatch } from "../redux/hooks";
+import { setError, setLoading } from "../features/movies/moviesSlice";
 
 export default function useFetchMovies(url: string, params: MovieQueryParams = {}) {
   const [data, setData] = useState<Response<Movie[]> | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
 
   const fetchMovies = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+    dispatch(setLoading(true));
+    dispatch(setError(null));
     try {
       const response = await fetchData<Movie[], MovieQueryParams>(url, params);
       setData(response);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message);
+      dispatch(setError(err.message));
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
-  }, [url, params]);
+  }, [url, params,dispatch]);
 
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
 
-  return { data, loading, error, refetch: fetchMovies };
+  return { data, refetch: fetchMovies };
 }
