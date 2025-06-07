@@ -1,10 +1,9 @@
 import { configureStore, combineSlices } from "@reduxjs/toolkit";
 import { moviesSlice } from "../features/movies/moviesSlice";
 import { watchlistSlice } from "../features/watchlist/watchlistSlice";
+import { reviewsSlice } from "../features/review/reviewSlice";
 import storage from "redux-persist/lib/storage";
 import {
-  PERSIST,
-  REHYDRATE,
   persistReducer,
   persistStore,
 } from "redux-persist";
@@ -13,7 +12,8 @@ import { searchIndicatorSlice } from "../features/search/searchIndicators";
 const rootReducers = combineSlices(
   moviesSlice,
   watchlistSlice,
-  searchIndicatorSlice
+  searchIndicatorSlice,
+  reviewsSlice
 );
 const persistConfig = {
   key: "root",
@@ -26,9 +26,7 @@ export const store = configureStore({
   reducer: persistedReducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [PERSIST, REHYDRATE],
-      },
+      serializableCheck: false,
     }),
 });
 

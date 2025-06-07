@@ -1,4 +1,4 @@
-import { FaHeart, FaStar, FaPlay, FaCalendarAlt } from "react-icons/fa";
+import { FaHeart, FaStar, FaPlay, FaCalendarAlt, FaPlus } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 import { Button } from "../components/Button";
 import { MdHowToVote } from "react-icons/md";
@@ -9,26 +9,50 @@ import type { Rating } from "../types/rating";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addFavorite } from "../features/watchlist/watchlistSlice";
 import toast from "react-hot-toast";
+import ReviewList from "../components/ReviewList";
+import { useEffect, useState } from "react";
+import ReviewForm from "../components/ReviewForm";
 
 export default function MoviePage() {
   const { movie, ratings } = useLoaderData<{
     movie: Movie;
     ratings: Rating;
   }>();
+
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.watchlist);
   const { movies } = useAppSelector((state) => state.movies);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [movieToReview, setMovieToReview] = useState<string | null>(null);
+  // Prevent body scroll when form is open
+  useEffect(() => {
+    if (showReviewForm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showReviewForm]);
 
   function handleAddToFavorites(movie: Movie) {
     const fullMovie = movies.filter((m) => m.id === movie.id);
+    if(fullMovie.length === 0) return
     dispatch(addFavorite(fullMovie[0]));
-    toast.success("Added to watchlist")
+    toast.success("Added to watchlist");
   }
+  const handleFormSubmit = () => {
+    setShowReviewForm(false);
+  };
+
+  const handleFormCancel = () => {
+    setShowReviewForm(false);
+  };
 
   return (
     <div className="min-h-screen bg-primary text-white">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
-
       <div className="relative z-10">
         <div className="container mx-auto px-4">
           <Link to="/" className="flex items-center">
@@ -55,7 +79,7 @@ export default function MoviePage() {
             </div>
 
             {/* Movie Details */}
-            <div className="space-y-6">
+            <div className="space-y-6 text-start">
               <div>
                 <h1 className="text-start text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   {movie.originalTitleText.text}
@@ -81,16 +105,16 @@ export default function MoviePage() {
                         key={i}
                         className={`w-5 h-5 ${
                           i < Math.floor(ratings.averageRating / 2)
-                            ? "text-yellow-400"
-                            : "text-gray-600"
+                            ? "text-secondary"
+                            : "text-accent/50"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-2xl font-bold text-yellow-400">
+                  <span className="text- font-bold text-secondary">
                     {ratings.averageRating.toFixed(1)}
                   </span>
-                  <span className="text-gray-400">/10</span>
+                  <span className="text-accent">/10</span>
                 </div>
               </div>
               <div className="space-y-4">
@@ -129,6 +153,37 @@ export default function MoviePage() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="max-w-5xl mx-auto">
+        <div className="flex justify-between items-center p-2 mt-20">
+          <p>Reviews</p>
+          <button
+            onClick={() =>{
+               setShowReviewForm(true)
+               setMovieToReview(movie.id)
+              }}
+            className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-md text-secondary hover:bg-secondary/10 font-bold"
+          >
+            <FaPlus />
+            <span>Review</span>
+          </button>
+        </div>
+        <ReviewList movieId={movie.id}/>
+      </div>
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+          showReviewForm ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setShowReviewForm(false)}
+      />
+      <div
+        className={`fixed top-0 right-0 bottom-0 w-full md:w-[600px] bg-primary shadow-2xl z-50 transition-transform duration-500 ease-in-out transform ${
+          showReviewForm ? "translate-x-0" : "translate-x-full"
+        } overflow-y-auto`}
+      >
+        <div className="p-6 md:p-8 text-start">
+          <ReviewForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} movieId={movieToReview}/>
         </div>
       </div>
     </div>

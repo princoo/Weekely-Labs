@@ -81,7 +81,7 @@ export default function WatchlistPage() {
                       <Button
                         variant="outline"
                         size="lg"
-                        className="border-secondary border-2 hover:bg-red-500 text-white hover:tex-red-500 bg-transparent w-full"
+                        className="border-secondary border-2 hover:bg-secondary/50 text-white hover:tex-red-500 bg-transparent w-full"
                         onClick={() => handleRemoveFromWatchlist(movie.id)}
                       >
                         <FaTrash className="w-4 h-4 mr-2" />

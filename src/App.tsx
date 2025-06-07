@@ -5,6 +5,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 import { ScrollToTop } from "./components/ScrollEffect";
+import TopNavBar from "./components/TopNavBar";
 
 function App() {
   const navigation = useNavigation();
@@ -14,6 +15,8 @@ function App() {
     <div>
       <SideBar />
       <div className="sm:ml-60 p-4">
+        <TopNavBar />
+
         <ScrollToTop />
         {isLoading ? <Loader /> : <Outlet />}
         <Footer />
