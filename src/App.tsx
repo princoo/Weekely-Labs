@@ -12,9 +12,9 @@ function App() {
   const isLoading = navigation.state === "loading";
 
   return (
-    <div>
+    <div className="bg-primary-light dark:bg-primary min-h-screen">
       <SideBar />
-      <div className="sm:ml-60 p-4">
+      <div className="sm:ml-60 p-10">
         <TopNavBar />
 
         <ScrollToTop />

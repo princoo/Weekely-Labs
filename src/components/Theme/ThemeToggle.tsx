@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setTheme } from "../../features/theme/themeSlice";
 
 interface ThemeToggleProps {
   className?: string;
@@ -10,33 +12,19 @@ export default function ThemeToggle({
   className = "",
   size = "medium",
 }: ThemeToggleProps) {
-  const [isDark, setIsDark] = useState(true);
+  const { theme } = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
+  const [isDark, setIsDark] = useState(theme === "dark");
 
-  // Prevent hydration mismatch
-  useEffect(() => {
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    } else {
-      setIsDark(prefersDark);
-    }
-  }, []);
-
-  // Apply theme to document
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      dispatch(setTheme("dark"));
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      dispatch(setTheme("light"));
     }
-  }, [isDark]);
+  }, [dispatch, isDark]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);

@@ -2,6 +2,7 @@ import { configureStore, combineSlices } from "@reduxjs/toolkit";
 import { moviesSlice } from "../features/movies/moviesSlice";
 import { watchlistSlice } from "../features/watchlist/watchlistSlice";
 import { reviewsSlice } from "../features/review/reviewSlice";
+import { themeSlice } from "../features/theme/themeSlice";
 import storage from "redux-persist/lib/storage";
 import {
   persistReducer,
@@ -13,12 +14,13 @@ const rootReducers = combineSlices(
   moviesSlice,
   watchlistSlice,
   searchIndicatorSlice,
-  reviewsSlice
+  reviewsSlice,
+  themeSlice
 );
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["watchlist"],
+  whitelist: ["watchlist","theme"],
 };
 const persistedReducers = persistReducer(persistConfig, rootReducers);
 

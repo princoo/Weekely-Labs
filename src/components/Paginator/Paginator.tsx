@@ -13,7 +13,7 @@ const Pagination = ({ next, onPrevious, onNext, page }: PaginatorProps) => {
         >
           <FaChevronLeft
             size={30}
-            className="text-white group-hover:text-secondary"
+            className="text-black/60 dark:text-white group-hover:text-secondary"
           />
         </button>
       )}
@@ -27,7 +27,7 @@ const Pagination = ({ next, onPrevious, onNext, page }: PaginatorProps) => {
         >
           <FaChevronRight
             size={30}
-            className="text-white group-hover:text-secondary"
+            className="text-black/60 dark:text-white group-hover:text-secondary"
           />
         </button>
       )}

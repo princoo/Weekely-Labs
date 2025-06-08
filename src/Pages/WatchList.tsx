@@ -15,7 +15,7 @@ export default function WatchlistPage() {
   };
 
   return (
-    <div className="min-h-scree text-white">
+    <div className="min-h-scree  text-black dark:text-white bg-primary-light dark:bg-primary">
       <div className="relative z-10">
         <Link to="/" className="flex items-center">
           <IoArrowBackOutline className="mb-10 w-10 h-10 cursor-pointer hover:bg-gray-400 p-2 rounded-md transition-colors duration-150 ease-in-out" />
@@ -23,10 +23,10 @@ export default function WatchlistPage() {
         {/* Header */}
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-black dark:text-accent">
               My Watchlist
             </h1>
-            <p className="text-gray-400 text-lg">
+            <p className="text-black/60 dark:text-accent text-lg">
               {favorites.length} {favorites.length === 1 ? "movie" : "movies"}{" "}
               saved for later
             </p>
@@ -38,7 +38,7 @@ export default function WatchlistPage() {
               {favorites.map((movie) => (
                 <div key={movie.id} className="group relative w-52">
                   {/* Movie Card */}
-                  <div className="bg-gray-900 h-[400px] rounded-lg overflow-hidden backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-gray-800/50">
+                  <div className="bg-primary/20 dark:bg-gray-900 h-[400px] rounded-lg overflow-hidden">
                     {/* Movie Poster */}
                     <div className="relative aspect-[1] overflow-hidden">
                       <img
@@ -49,8 +49,8 @@ export default function WatchlistPage() {
 
                       {/* Rating badge */}
                       <div className="absolute top-2 left-2 bg-black/80 rounded-full px-2 py-1 flex items-center gap-1">
-                        <FaStar className="w-3 h-3 text-yellow-400" />
-                        <span className="text-xs font-semibold">
+                        <FaStar className="w-3 h-3 text-secondary" />
+                        <span className="text-xs font-semibold text-primary-light">
                           {movie.ratingsSummary.aggregateRating}
                         </span>
                       </div>
@@ -61,7 +61,7 @@ export default function WatchlistPage() {
                       <h3 className="font-semibold text-md mb-1 line-clamp-2">
                         {movie.originalTitleText.text}
                       </h3>
-                      <p className="text-gray-400 text-sm mb-3">
+                      <p className="text-black/40 text-sm mb-3">
                         {movie.releaseYear?.year}
                       </p>
 

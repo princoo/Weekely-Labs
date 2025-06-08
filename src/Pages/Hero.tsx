@@ -16,7 +16,6 @@ import {
   setPage,
   setSearch,
 } from "../features/movies/moviesSlice";
-import WatchListBadge from "../components/Watchlist/WatchListBadge";
 import { useSyncQueryToRedux } from "../hooks/useSyncQueryToRedux";
 import { useSyncReduxToQuery } from "../hooks/useSyncReduxToQuery";
 
@@ -93,7 +92,6 @@ export default function Hero() {
     <div className="w-full">
       <div className="flex items-center justify-between mb-4 gap-2 w-full">
         <SearchBar onSearch={handleSearch} />
-        <WatchListBadge />
       </div>
       {search && (
         <p className="text-2xl font-bold text-start">Results for "{search}"</p>
@@ -103,7 +101,7 @@ export default function Hero() {
           <MoviesContainer movies={movies} />
         </div>
       ) : (
-        <p className="mt-20">Movies not found</p>
+        <p className="mt-20 text-black/60 dark:text-accent">Movies not found</p>
       )}
       <Pagination
         next={nextPage}

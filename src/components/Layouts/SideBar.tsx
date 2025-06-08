@@ -45,24 +45,24 @@ export default function SideBar() {
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-primary">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-primary-light dark:bg-primary">
           <div className="flex items-center justify-between ps-2.5 mb-5">
             <a href="/" className="flex items-center">
-              <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
+              <span className="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">
                 Movie Stro
               </span>
             </a>
             {/* Add close button for mobile */}
             <button
               onClick={toggleSidebar}
-              className="text-white p-2 rounded-lg hover:bg-secondary/50 sm:hidden"
+              className="text-black dark:text-white p-2 rounded-lg hover:bg-secondary/50 sm:hidden"
             >
               ✕
             </button>
           </div>
           <ul className="space-y-2 font-medium">
             <li
-              className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
+              className={`flex items-center p-2 text-black dark:text-white rounded-lg hover:bg-secondary/50 cursor-pointer group text-sm ${
                 !filters.genre && "bg-secondary"
               }`}
               onClick={() => {
@@ -75,9 +75,9 @@ export default function SideBar() {
             {genreList.map((genre) => (
               <li
                 key={genre}
-                className={`flex items-center p-2 text-white rounded-lg hover:bg-secondary/50 cursor-pointer ${
+                className={`flex items-center p-2 dark:text-white rounded-lg hover:bg-secondary/50 cursor-pointer ${
                   filters.genre === genre && "bg-secondary"
-                } group text-sm`}
+                } group text-sm text-black`}
                 onClick={() => handleClick(genre)}
               >
                 <span className="ms-3">{genre}</span>

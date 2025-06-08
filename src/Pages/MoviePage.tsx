@@ -52,7 +52,7 @@ export default function MoviePage() {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-white">
+    <div className="min-h-screen bg-primary-light dark:bg-primary text-black dark:text-white">
       <div className="relative z-10">
         <div className="container mx-auto px-4">
           <Link to="/" className="flex items-center">
@@ -69,7 +69,7 @@ export default function MoviePage() {
                 <div className="absolute inset-0 bg-black/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <Button
                     size="lg"
-                    className="bg-secondary hover:bg-red-500 text-white"
+                    className="bg-secondary hover:bg-secondary/50 text-white"
                   >
                     <FaPlay className="w-5 h-5 mr-2" />
                     Watch Trailer
@@ -81,7 +81,7 @@ export default function MoviePage() {
             {/* Movie Details */}
             <div className="space-y-6 text-start">
               <div>
-                <h1 className="text-start text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <h1 className="text-start text-3xl lg:text-4xl font-bold mb-2 dark:text-accent  text-black bg-clip-text">
                   {movie.originalTitleText.text}
                 </h1>
                 <div className="flex items-center gap-4 text-gray-400">
@@ -123,7 +123,7 @@ export default function MoviePage() {
               )}
               <div className="space-y-4">
                 <h2 className="text-md font-semibold">Overview</h2>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-black/50 dark:text-accent leading-relaxed text-lg">
                   {movie.primaryImage?.caption?.plainText ||
                     "No description available."}
                 </p>
@@ -138,22 +138,13 @@ export default function MoviePage() {
                 ) : (
                   <Button
                     size="lg"
-                    className="bg-secondary hover:bg-red-500 text-white font-semibold px-8"
+                    className="bg-secondary hover:bg-secondary/80 text-white font-semibold px-8"
                     onClick={() => handleAddToFavorites(movie)}
                   >
                     <FaHeart className="w-5 h-5 mr-2" />
                     Add to Favorites
                   </Button>
                 )}
-
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-gray-600 text-white hover:bg-gray-800 px-8"
-                >
-                  <FaPlay className="w-5 h-5 mr-2" />
-                  Watch Now
-                </Button>
               </div>
             </div>
           </div>

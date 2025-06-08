@@ -3,9 +3,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-primary:#0f0f11; /* Your custom primary color */
-    --color-secondary: #F76B15; /* Your secondary color, if needed */
-    --color-accent: #B0B4BA; /* Your accent color */
+    --color-primary:#0f0f11; 
+    --color-secondary: #F76B15; 
+    --color-accent: #B0B4BA;
+    --color-primary-light:#EDEEF0; 
+
   }
 
 @layer base {

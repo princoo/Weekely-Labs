@@ -9,7 +9,7 @@ export default function WatchListBadge() {
   return (
     <Link
       to="watchlist"
-      className="relative flex items-center space-x-2 text-gray-300 hover:text-secondary group"
+      className="relative flex items-center space-x-2 text-black/60 dark:text-gray-300 hover:text-secondary group"
     >
       <div className="relative">
         <FaBookmark className="w-5 h-5" />

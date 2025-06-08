@@ -10,9 +10,9 @@ export default function TopNavBar() {
   ]
   return (
     <div>
-      <nav className="bg-white dark:bg-primary border-b">
+      <nav className="bg-primary-light dark:bg-primary border-b mb-5">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pb-2">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-black/60 dark:text-accent">
               Movie Stro
             </span>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -51,7 +51,7 @@ export default function TopNavBar() {
                 <li key={item.title} className="p-2 rounded-sm md:p-0">
                   <a
                     href={item.href}
-                    className="block py-2 pl-3 pr-4 text-accent hover:text-secondary"
+                    className="block py-2 pl-3 pr-4 text-black/60 rounded md:bg-transparent md:p-0 dark:text-accent hover:text-secondary"
                     aria-current="page"
                   >
                     {item.title}

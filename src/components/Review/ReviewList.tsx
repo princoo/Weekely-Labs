@@ -24,7 +24,7 @@ export default function ReviewList({ movieId }: { movieId: string }) {
 
   return (
     <div>
-      <div className="bg-primary rounded-2xl">
+      <div className="bg-primary-light dark:bg-primary rounded-2xl">
         {/* Reviews List */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-12">
