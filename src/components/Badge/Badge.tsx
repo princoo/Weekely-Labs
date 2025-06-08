@@ -1,5 +1,3 @@
-import type React from "react"
-
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "outline"
   children: React.ReactNode

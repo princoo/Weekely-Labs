@@ -1,7 +1,7 @@
-import type { MovieCard } from "../types/movie";
-import StarIcon from "./StarIcon";
-import defaultImage from "../assets/image_not_found.png";
-import ImageWithLoading from "./ImageWithLoader";
+import type { MovieCard } from "../../types/movie";
+import StarIcon from "../Rating/StarIcon";
+import defaultImage from "../../assets/image_not_found.png";
+import ImageWithLoading from "../ImageContainer/ImageWithLoader";
 import { Link } from "react-router-dom";
 
 export default function MovieCard({ movie }: MovieCard) {

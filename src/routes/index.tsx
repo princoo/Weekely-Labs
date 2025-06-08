@@ -4,7 +4,7 @@ import App from "../App";
 import MoviePage from "../Pages/MoviePage";
 import { movieDetailLoader } from "./movieDetailLoader";
 import WatchlistPage from "../Pages/WatchList";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 
 const router = createBrowserRouter(
   [

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import ReviewCard from "./ReviewCard";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import reviewServices from "../firebase/reviewServices";
-import Loader from "./Loader";
-import { setReviews } from "../features/review/reviewSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import reviewServices from "../../firebase/reviewServices";
+import Loader from "../Loader/Loader";
+import { setReviews } from "../../features/review/reviewSlice";
 
 export default function ReviewList({ movieId }: { movieId: string }) {
   const [isLoading, setIsLoading] = useState(true);

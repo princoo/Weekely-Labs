@@ -1,5 +1,5 @@
 import { FaTrash, FaPlay, FaStar } from "react-icons/fa";
-import { Button } from "../components/Button";
+import { Button } from "../components/Button/Button";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { removeFavorite } from "../features/watchlist/watchlistSlice";
 import { Link } from "react-router-dom";

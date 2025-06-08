@@ -1,6 +1,6 @@
-import type { Review } from "../types/review";
+import type { Review } from "../../types/review";
 import StarRating from "./StarRatings";
-import { formatTime } from "../utils/formatTime";
+import { formatTime } from "../../utils/formatTime";
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (

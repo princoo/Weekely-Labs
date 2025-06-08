@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ImageWithLoadingProps } from "../types/image";
+import type { ImageWithLoadingProps } from "../../types/image";
 
 export default function ImageWithLoading({
   src,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { FaBookmark } from "react-icons/fa6";
 
 export default function WatchListBadge() {

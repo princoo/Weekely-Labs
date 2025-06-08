@@ -1,5 +1,5 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-import type { PaginatorProps } from "../types/paginator";
+import type { PaginatorProps } from "../../types/paginator";
 
 const Pagination = ({ next, onPrevious, onNext, page }: PaginatorProps) => {
   return (

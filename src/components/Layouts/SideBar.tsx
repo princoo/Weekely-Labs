@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { genreList } from "../data/genre";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { editFilter, removeFilter } from "../features/movies/moviesSlice";
+import { genreList } from "../../data/genre";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { editFilter, removeFilter } from "../../features/movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function SideBar() {
@@ -90,6 +90,7 @@ export default function SideBar() {
       {/* add overlay for mobile to close sidebar when clicking outside */}
       {isSidebarOpen && (
         <div
+          data-testid="overlay"
           className="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden"
           onClick={toggleSidebar}
         ></div>

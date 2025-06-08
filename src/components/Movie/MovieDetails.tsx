@@ -1,8 +1,8 @@
-import StarIcon from "./StarIcon";
-import defaultImage from "../assets/image_not_found.png";
-import type { Movie } from "../types/movie";
+import StarIcon from "../Rating/StarIcon";
+import defaultImage from "../../assets/image_not_found.png";
+import type { Movie } from "../../types/movie";
 import { MdOutlineHowToVote } from "react-icons/md";
-import ImageWithLoading from "./ImageWithLoader";
+import ImageWithLoading from "../ImageContainer/ImageWithLoader";
 
 export default function MovieDetails({ movie }: { movie: Movie }) {
   return (

@@ -1,11 +1,11 @@
 import "./App.css";
-import SideBar from "./components/SideBar";
-import Footer from "./components/Footer";
+import SideBar from "./components/Layouts/SideBar";
+import Footer from "./components/Layouts/Footer";
 import { Outlet, useNavigation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Loader from "./components/Loader";
+import Loader from "./components/Loader/Loader";
 import { ScrollToTop } from "./components/ScrollEffect";
-import TopNavBar from "./components/TopNavBar";
+import TopNavBar from "./components/Layouts/TopNavBar";
 
 function App() {
   const navigation = useNavigation();

@@ -1,6 +1,6 @@
 import { FaHeart, FaStar, FaPlay, FaCalendarAlt, FaPlus } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
-import { Button } from "../components/Button";
+import { Button } from "../components/Button/Button";
 import { MdHowToVote } from "react-icons/md";
 import { IoArrowBackOutline } from "react-icons/io5";
 import type { Movie } from "../types/movie";
@@ -9,9 +9,9 @@ import type { Rating } from "../types/rating";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addFavorite } from "../features/watchlist/watchlistSlice";
 import toast from "react-hot-toast";
-import ReviewList from "../components/ReviewList";
+import ReviewList from "../components/Review/ReviewList";
 import { useEffect, useState } from "react";
-import ReviewForm from "../components/ReviewForm";
+import ReviewForm from "../components/Review/ReviewForm";
 
 export default function MoviePage() {
   const { movie, ratings } = useLoaderData<{
@@ -36,10 +36,10 @@ export default function MoviePage() {
       document.body.style.overflow = "auto";
     };
   }, [showReviewForm]);
-
+  console.log(ratings);
   function handleAddToFavorites(movie: Movie) {
     const fullMovie = movies.filter((m) => m.id === movie.id);
-    if(fullMovie.length === 0) return
+    if (fullMovie.length === 0) return;
     dispatch(addFavorite(fullMovie[0]));
     toast.success("Added to watchlist");
   }
@@ -89,34 +89,38 @@ export default function MoviePage() {
                     <FaCalendarAlt className="w-4 h-4" />
                     {movie.releaseYear?.year}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <MdHowToVote className="w-4 h-4" />
-                    {ratings.numVotes}
-                  </span>
+                  {ratings && (
+                    <span className="flex items-center gap-1">
+                      <MdHowToVote className="w-4 h-4" />
+                      {ratings.numVotes}
+                    </span>
+                  )}
                 </div>
               </div>
 
               {/* Rating */}
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < Math.floor(ratings.averageRating / 2)
-                            ? "text-secondary"
-                            : "text-accent/50"
-                        }`}
-                      />
-                    ))}
+              {ratings && (
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar
+                          key={i}
+                          className={`w-5 h-5 ${
+                            i < Math.floor(ratings.averageRating / 2)
+                              ? "text-secondary"
+                              : "text-accent/50"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text- font-bold text-secondary">
+                      {ratings.averageRating.toFixed(1)}
+                    </span>
+                    <span className="text-accent">/10</span>
                   </div>
-                  <span className="text- font-bold text-secondary">
-                    {ratings.averageRating.toFixed(1)}
-                  </span>
-                  <span className="text-accent">/10</span>
                 </div>
-              </div>
+              )}
               <div className="space-y-4">
                 <h2 className="text-md font-semibold">Overview</h2>
                 <p className="text-gray-300 leading-relaxed text-lg">
@@ -159,17 +163,17 @@ export default function MoviePage() {
         <div className="flex justify-between items-center p-2 mt-20">
           <p>Reviews</p>
           <button
-            onClick={() =>{
-               setShowReviewForm(true)
-               setMovieToReview(movie.id)
-              }}
+            onClick={() => {
+              setShowReviewForm(true);
+              setMovieToReview(movie.id);
+            }}
             className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-md text-secondary hover:bg-secondary/10 font-bold"
           >
             <FaPlus />
             <span>Review</span>
           </button>
         </div>
-        <ReviewList movieId={movie.id}/>
+        <ReviewList movieId={movie.id} />
       </div>
       <div
         className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${
@@ -183,7 +187,11 @@ export default function MoviePage() {
         } overflow-y-auto`}
       >
         <div className="p-6 md:p-8 text-start">
-          <ReviewForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} movieId={movieToReview}/>
+          <ReviewForm
+            onSubmit={handleFormSubmit}
+            onCancel={handleFormCancel}
+            movieId={movieToReview}
+          />
         </div>
       </div>
     </div>

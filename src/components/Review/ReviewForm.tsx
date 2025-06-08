@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import StarRating from "./StarRatings";
-import type { ReviewFormData, ReviewProps } from "../types/review";
-import { InputField } from "./Input";
-import { useAppDispatch } from "../redux/hooks";
-import reviewServices from "../firebase/reviewServices";
-import { addReview } from "../features/review/reviewSlice";
+import type { ReviewFormData, ReviewProps } from "../../types/review";
+import { InputField } from "../Input/Input";
+import { useAppDispatch } from "../../redux/hooks";
+import reviewServices from "../../firebase/reviewServices";
+import { addReview } from "../../features/review/reviewSlice";
 import toast from "react-hot-toast";
 
 export default function ReviewForm({

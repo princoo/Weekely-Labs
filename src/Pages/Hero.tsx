@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { produce } from "immer";
 import useFetchMovies from "../hooks/useFetchMovies";
-import SearchBar from "../components/SearchBar";
-import Pagination from "../components/Paginator";
-import NotFound from "../components/NotFound";
-import Loader from "../components/Loader";
+import SearchBar from "../components/Search/SearchBar";
+import Pagination from "../components/Paginator/Paginator";
+import NotFound from "../components/NotFound/NotFound";
+import Loader from "../components/Loader/Loader";
 import useSearch from "../hooks/useSearch";
-import MoviesContainer from "../components/MoviesContainer";
+import MoviesContainer from "../components//Movie/MoviesContainer";
 import { getUpdatedPageUrl } from "../utils/getupdatedUrl";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
@@ -16,7 +16,7 @@ import {
   setPage,
   setSearch,
 } from "../features/movies/moviesSlice";
-import WatchListBadge from "../components/WatchListBadge";
+import WatchListBadge from "../components/Watchlist/WatchListBadge";
 import { useSyncQueryToRedux } from "../hooks/useSyncQueryToRedux";
 import { useSyncReduxToQuery } from "../hooks/useSyncReduxToQuery";
 

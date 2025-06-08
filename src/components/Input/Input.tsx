@@ -39,7 +39,9 @@ export const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className={` ${className} my-2`}>
-      <label className="block text-sm font-bold">{label}</label>
+      <label className="block text-sm font-bold" htmlFor={name}>
+        {label}
+      </label>
       <div className="relative mt-2">
         <input
           type={type === "password" && showPassword ? "text" : type}
@@ -52,6 +54,7 @@ export const InputField: React.FC<InputFieldProps> = ({
           required={required}
           className={` block w-full px-3 py-3 border border-accent dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm pr-10 `}
           autoFocus={focus}
+          id={name}
         />
         {type === "password" && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
