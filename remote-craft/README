@@ -3,6 +3,15 @@
 A remote job listing app built with Next.js and the [Remotive API](https://remotive.com/remote-jobs/api).
 
 ---
+##  Project Setup
+
+This project is part of a learning module focused on rendering strategies in Next.js. It emphasizes:
+
+- **Static Generation (`getStaticProps`, `getStaticPaths`)**
+- **Incremental Static Regeneration (ISR)**
+- **Dynamic Routing**
+
+---
 
 ##  Week 1 Goals: Core Pages & Rendering Strategies
 
@@ -30,7 +39,7 @@ A remote job listing app built with Next.js and the [Remotive API](https://remot
 
 ---
 
-## 🎨 UI Design
+##  UI Design
 
 - Global font: `Work Sans`
 - Theme colors:
@@ -40,7 +49,7 @@ A remote job listing app built with Next.js and the [Remotive API](https://remot
 
 ---
 
-## 🧠 Reflective Questions
+##  Reflective Questions
 
 Responses should go in a separate `reflection.md` file.
 
@@ -50,7 +59,7 @@ Responses should go in a separate `reflection.md` file.
 
 ---
 
-## 🔗 API Reference
+##  API Reference
 
 - Remotive Jobs API: [https://remotive.com/remote-jobs/api](https://remotive.com/remote-jobs/api)
 
