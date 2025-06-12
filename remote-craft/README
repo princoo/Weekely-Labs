@@ -39,3 +39,19 @@ A remote job listing app built with Next.js and the [Remotive API](https://remot
 - Consistent navbar across all pages
 
 ---
+
+## 🧠 Reflective Questions
+
+Responses should go in a separate `reflection.md` file.
+
+- What makes a page a good candidate for `getStaticProps` versus `getServerSideProps`?
+- How does ISR differ from traditional SSG?
+- What happens during fallback states?
+
+---
+
+## 🔗 API Reference
+
+- Remotive Jobs API: [https://remotive.com/remote-jobs/api](https://remotive.com/remote-jobs/api)
+
+---
