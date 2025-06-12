@@ -29,3 +29,13 @@ A remote job listing app built with Next.js and the [Remotive API](https://remot
 - Filter jobs by company name and reuse the job listing component
 
 ---
+
+## 🎨 UI Design
+
+- Global font: `Work Sans`
+- Theme colors:
+  - `Gray: #F0F2F5`
+  - `Blue: #1A80E5`
+- Consistent navbar across all pages
+
+---
