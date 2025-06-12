@@ -1,40 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# RemoteCraft
 
-## Getting Started
+A remote job listing app built with Next.js and the [Remotive API](https://remotive.com/remote-jobs/api).
 
-First, run the development server:
+---
+##  Project Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is part of a learning module focused on rendering strategies in Next.js. It emphasizes:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Static Generation (`getStaticProps`, `getStaticPaths`)**
+- **Incremental Static Regeneration (ISR)**
+- **Dynamic Routing**
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+##  Week 1 Goals: Core Pages & Rendering Strategies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+###  Tasks
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### 1. Initialize the Project
+- Create a new Next.js project
+- Install dependencies
+- Set up a global layout with a persistent navigation bar across all pages
 
-## Learn More
+#### 2. Homepage with Job Listings
+- Fetch jobs from the Remotive public API
+- Use `getStaticProps` for static generation
+- Enable **Incremental Static Regeneration (ISR)** with a 10–30 second revalidation interval
 
-To learn more about Next.js, take a look at the following resources:
+#### 3. Job Detail Page
+- Dynamic route: `/jobs/[slug]`
+- Use `getStaticPaths` and `getStaticProps` for static generation of job pages
+- Handle `fallback: true` to enable ISR for new jobs
+- Display a loading state during fallback
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+#### 4. Company Pages (`/company/[slug]`)
+- Use dynamic routing for each company
+- Filter jobs by company name and reuse the job listing component
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+##  UI Design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Global font: `Work Sans`
+- Theme colors:
+  - `Gray: #F0F2F5`
+  - `Blue: #1A80E5`
+- Consistent navbar across all pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+##  Reflective Questions
+
+Responses should go in a separate `reflection.md` file.
+
+- What makes a page a good candidate for `getStaticProps` versus `getServerSideProps`?
+- How does ISR differ from traditional SSG?
+- What happens during fallback states?
+
+---
+
+##  API Reference
+
+- Remotive Jobs API: [https://remotive.com/remote-jobs/api](https://remotive.com/remote-jobs/api)
+
+---
